@@ -1,0 +1,164 @@
+<!-- /administration.html
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>Train Schedule: Administrator</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" defer></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous" defer></script>
+
+    <!-- Internal CSS -->
+    <!-- <style></style> -->
+
+    <!-- External CSS -->
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="asset/style/reset.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="asset/style/style.css"> -->
+
+    <!-- Internal Javascript -->
+    <!-- <script></script> -->
+
+    <!-- External Javascript -->
+    <!-- <script src="asset/script/jdcUtil.js" async></script> -->
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" defer></script>
+    <script src="asset/script/jdcUtil.js" defer></script>
+    <script src="asset/script/script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Bootstrap Margin and Padding Notes
+        * Rows and columns control X-axis margin and padding.
+            * Rows have -15 X-axis margin by default.
+            * Columns have 15 X-axis (px-3) padding by default.
+            * This results in uneven spacing (15px on the edges, 30px between
+            columns).
+            * Setting row right margin to 0 (mr-0) and column right padding to 0
+            (pr-0) ensures even spacing between grid contents.
+        * Components control Y-axis margin and padding.
+            * Not all components set a bottom margin by default, add margin
+            (mb-3) when needed.
+            * Set margin top on first element (mt-3) for even spacing.
+    -->
+
+
+    <!-- Container: Body -->
+    <div id="body" class="container-fluid">
+
+
+        <!-- Row 1: Title -->
+        <div class="row mr-0">
+            <div class="col-12 pr-0">
+                <!-- Jumbotron -->
+                <div class="jumbotron py-4 mt-3 mb-3 text-center">
+                    <h1 class="display-4">City of Pandora Station</h1>
+                    <p id="time" class="lead">${ moment().format( 'HH:mm' ) }</p>
+                </div>
+                <!-- Jumbotron -->
+            </div>
+        </div>
+        <!-- Row 1: Title -->
+
+
+        <!-- Row 2: Train Schedule -->
+        <div class="row mr-0">
+            <div class="col-12 pr-0">
+                <!-- Card -->
+                <div id="schedule-card" class="card mb-3">
+                    <h5 class="card-header">
+                        Train Schedule
+                    </h5>
+                    <div class="card-body p-0">
+                        <!-- Table -->
+                        <table id="schedule-table" class="table table-striped my-0">
+                            <thead>
+                                <tr class="table-borderless">
+                                    <th scope="col">Line Name</th>
+                                    <th scope="col">Destination</th>
+                                    <th scope="col" class="text-right">Frequency (minutes)</th>
+                                    <th scope="col" class="text-right">Next Train Time</th>
+                                    <th scope="col" class="text-right">Wait Time (minutes)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="schedule-table-body">
+                                <!-- Template
+                                <tr id="schedule-table-${ key }-row">
+                                    <td id="schedule-table-${ key }-line-name">${ data[ key ][ 'line-name' ] }</td>
+                                    <td id="schedule-table-${ key }-destination">${ data[ key ][ 'destination' ] }</td>
+                                    <td id="schedule-table-${ key }-frequency" class="text-right">${ data[ key ][ 'frequency' ] }</td>
+                                    <td id="schedule-table-${ key }-next-train-time" class="text-right">${ nextTrainMoment.format( 'HH:mm' ) }</td>
+                                    <td id="schedule-table-${ key }-wait-time" class="text-right">${ ( nextTrainMoment.diff( moment() , 'minutes' ) ) }</td>
+                                </tr>
+                                -->
+                            </tbody>
+                        </table>
+                        <!-- Table -->
+                    </div>
+                </div>
+                <!-- Card -->
+            </div>
+        </div>
+        <!-- Row 2: Train Schedule -->
+
+
+        <!-- Row 3: Administration -->
+        <div class="row mr-0">
+            <div class="col-12 pr-0">
+                <!-- Card -->
+                <div id="admin-card" class="card mb-3">
+                    <h5 class="card-header">
+                        Administration
+                    </h5>
+                    <div class="card-body">
+                    <!-- Form -->
+                    <form id="admin-form">
+                        <div class="form-group">
+                            <label for="admin-form-line-name">Line Name</label>
+                            <input id="admin-form-line-name" name="line-name" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-form-destination">Destination</label>
+                            <input id="admin-form-destination" name="destination" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-form-first-train-time">First Train Time (HH:mm)</label>
+                            <input id="admin-form-first-train-time" name="first-train-time" type="text" class="form-control" required pattern="[0-9]{2}:[0-9]{2}">
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-form-frequency">Frequency (minutes)</label>
+                            <input id="admin-form-frequency" name="frequency" type="number" class="form-control" required min="1">
+                        </div>
+                        <button id="admin-form-submit" type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <!-- Form -->
+                    </div>
+                </div>
+                <!-- Card -->
+            </div>
+        </div>
+        <!-- Row 3: Administration -->
+
+
+    </div>
+    <!-- Container: Body -->
+
+
+    <!-- Internal Javascript -->
+    <!-- <script></script> -->
+</body>
+
+</html>
