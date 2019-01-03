@@ -115,6 +115,44 @@
         <!-- Row 2: Train Schedule -->
 
 
+        <!-- Row 3: Administration -->
+        <div class="row mr-0">
+            <div class="col-12 pr-0">
+                <!-- Card -->
+                <div id="admin-card" class="card mb-3">
+                    <h5 class="card-header">
+                        Administration
+                    </h5>
+                    <div class="card-body">
+                    <!-- Form -->
+                    <form id="admin-form">
+                        <div class="form-group">
+                            <label for="admin-form-line-name">Line Name</label>
+                            <input id="admin-form-line-name" name="line-name" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-form-destination">Destination</label>
+                            <input id="admin-form-destination" name="destination" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-form-first-train-time">First Train Time (HH:mm)</label>
+                            <input id="admin-form-first-train-time" name="first-train-time" type="text" class="form-control" required pattern="[0-9]{2}:[0-9]{2}">
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-form-frequency">Frequency (minutes)</label>
+                            <input id="admin-form-frequency" name="frequency" type="number" class="form-control" required min="1">
+                        </div>
+                        <button id="admin-form-submit" type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <!-- Form -->
+                    </div>
+                </div>
+                <!-- Card -->
+            </div>
+        </div>
+        <!-- Row 3: Administration -->
+
+
     </div>
     <!-- Container: Body -->
 
